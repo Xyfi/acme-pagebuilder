@@ -15,20 +15,46 @@ define( 'YSTPB_PLUGIN_FILE', __FILE__ );
 function ystpb_enqueue_scripts() {
 	global $pagenow;
 
+	if ( get_post_type() !== 'acme-pages' ) {
+		return;
+	}
+
 	if ( $pagenow === 'post.php' || $pagenow === 'post-new.php' ) {
 		wp_register_script(
 			'ystpb_pagebuilder',
 			plugins_url( 'js/dist/pagebuilder.js', YSTPB_PLUGIN_FILE ),
 			array(
-				'wp-plugins',
+				"wp-data",
+				"wp-element",
 			),
-			null,
+			true,
 			true
 		);
-		wp_enqueue_script( 'ystpb_pagebuilder' );
+		 wp_enqueue_script( 'ystpb_pagebuilder' );
 	}
 }
 
-add_action( 'admin_init', 'ystpb_enqueue_scripts' );
+function ystpb_register_post_type() {
+	register_post_type( 'acme-pages', array(
+		'has_archive' => 'acme/pagebuilder',
+		'label'       => __( 'Acme Pages', 'acme' ),
+		'public'      => true,
+		'rewrite'     => array(
+			'feeds'      => false,
+			'slug'       => 'acme/pagebuilder',
+			'with_front' => false,
+		),
+	) );
+}
+
+function ystpb_hide_editor() {
+
+}
+
+add_action( 'admin_init', 'ystpb_hide_editor' );
+add_action( 'admin_enqueue_scripts', 'ystpb_enqueue_scripts' );
+add_action( 'init', 'ystpb_register_post_type' );
+
+
 
 

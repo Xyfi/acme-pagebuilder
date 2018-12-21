@@ -1,7 +1,5 @@
 const path = require( "path" );
 
-console.log( process.env.NODE_ )
-
 module.exports = {
 	mode: process.env.NODE_ENV,
 	entry: {
@@ -10,6 +8,10 @@ module.exports = {
 	output: {
 		path: path.resolve( "js", "dist" ),
 		filename: "[name].js",
+	},
+	externals: {
+		"@wordpress/data": "wp.data",
+		"@wordpress/element": "wp.element",
 	},
 	module: {
 		rules: [
