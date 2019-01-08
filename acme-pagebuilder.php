@@ -21,16 +21,25 @@ function ystpb_enqueue_scripts() {
 
 	if ( $pagenow === 'post.php' || $pagenow === 'post-new.php' ) {
 		wp_register_script(
+			'ystpb_lodash',
+			plugins_url( 'js/vendor/lodash.min.js', YSTPB_PLUGIN_FILE ),
+			array(),
+			false,
+			true
+		);
+		wp_register_script(
 			'ystpb_pagebuilder',
 			plugins_url( 'js/dist/pagebuilder.js', YSTPB_PLUGIN_FILE ),
 			array(
 				"wp-data",
 				"wp-element",
+				"ystpb_lodash",
 			),
 			true,
 			true
 		);
-		 wp_enqueue_script( 'ystpb_pagebuilder' );
+		wp_add_inline_script( "ystpb_lodash", "window.lodash = _.noConflict();", "after" );
+		wp_enqueue_script( 'ystpb_pagebuilder' );
 	}
 }
 

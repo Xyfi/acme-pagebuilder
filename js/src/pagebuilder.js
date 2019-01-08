@@ -1,4 +1,4 @@
-import "@wordpress/editor/src/store";
+import "@wordpress/editor/build/store";
 import { render } from "@wordpress/element";
 
 const editorDiv = document.getElementById( "postdivrich" );
@@ -12,4 +12,4 @@ editorDiv.setAttribute( "style", "display: none;" );
 
 render( <h1>TEST</h1>, document.getElementById( "acme-pagebuilder" ) );
 
-// document.getElementById( "postdivrich" ).setAttribute( "style", "display: none;" );
+document.getElementById( "postdivrich" ).setAttribute( "style", "display: none;" );

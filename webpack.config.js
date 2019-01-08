@@ -12,6 +12,7 @@ module.exports = {
 	externals: {
 		"@wordpress/data": "wp.data",
 		"@wordpress/element": "wp.element",
+		"lodash": "window.lodash",
 	},
 	module: {
 		rules: [
@@ -22,5 +23,5 @@ module.exports = {
 				]
 			}
 		]
-	}
+	},
 };
