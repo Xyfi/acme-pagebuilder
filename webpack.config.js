@@ -12,6 +12,7 @@ module.exports = {
 	externals: {
 		"@wordpress/data": "wp.data",
 		"@wordpress/element": "wp.element",
+		"@wordpress/compose": "wp.compose",
 		"lodash": "window.lodash",
 	},
 	module: {
